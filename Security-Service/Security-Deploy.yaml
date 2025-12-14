@@ -15,6 +15,7 @@ spec:
       containers:
         - name: faculty-security-service
           image: faculty_management-faculty-security-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
           env:

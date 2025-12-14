@@ -15,7 +15,7 @@ spec:               # Configuration du Deployment.
       containers:    # Kubernetes lance un conteneur avec :
         - name: faculty-discovery-service  # nom de conteneur dans un pod
           image: faculty_management-faculty-discovery-service:latest # image de conteneur
-          #imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8761 # port interne de conteneur --> Le conteneur écoute sur le port 871
 

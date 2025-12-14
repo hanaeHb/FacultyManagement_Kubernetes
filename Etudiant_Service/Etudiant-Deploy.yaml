@@ -15,11 +15,14 @@ spec:
       containers:
         - name: faculty-etudiant-service
           image: faculty_management-faculty-etudiant-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8082
           env:
             - name: DISCOVERY_SERVICE_URL
               value: http://faculty-discovery-service.default.svc.cluster.local:8761/eureka
+            - name: CONFIG_SERVICE_URL
+              value: http://faculty-config-service.default.svc.cluster.local:9999
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -27,13 +30,14 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             failureThreshold: 4
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: faculty-etudiant-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: faculty-etudiant-service
   ports:
